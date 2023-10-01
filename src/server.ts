@@ -1,15 +1,15 @@
-import "dotenv/config";
-import Fastify from "fastify";
+import 'dotenv/config';
+import Fastify from 'fastify';
 
 const port = process.env.PORT || 3000;
-const host = process.env.HOST || "0.0.0.0";
+const host = process.env.HOST || '0.0.0.0';
 
 const fastify = Fastify({
   logger: true,
 });
 
-fastify.get("/", (request, response) => {
-  response.send({ hello: "world" });
+fastify.get('/', (request, response) => {
+  response.send({ hello: 'world' });
 });
 
 fastify.listen({ port, host }, (err) => {
