@@ -1,6 +1,6 @@
 {
   "name": "library-management-system",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "app.js",
   "scripts": {
     "build": "tsup src --out-dir build",
@@ -17,7 +17,7 @@
   "description": "A Library Management System (LMS) allows a library to manage its books, members, and their borrowing activities.",
   "type": "module",
   "dependencies": {
-    "@prisma/client": "^5.3.1",
+    "@prisma/client": "^5.4.1",
     "dotenv": "^16.3.1",
     "fastify": "^4.23.2",
     "pino-pretty": "^10.2.0",
@@ -25,13 +25,14 @@
   },
   "devDependencies": {
     "@types/node": "^20.8.0",
+    "@types/pg": "^8.10.3",
     "@typescript-eslint/eslint-plugin": "^6.7.3",
     "@typescript-eslint/parser": "^6.7.3",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.0",
     "prettier": "^3.0.3",
-    "prisma": "^5.3.1",
+    "prisma": "^5.4.1",
     "ts-node": "^10.9.1",
     "tsup": "^7.2.0",
     "tsx": "^3.13.0",
