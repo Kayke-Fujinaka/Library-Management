@@ -1,10 +1,10 @@
 {
   "name": "library-management-system",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "main": "app.js",
   "scripts": {
     "build": "tsup src --out-dir build",
-    "start": "node build/server.js",
+    "start": "node build/server.cjs",
     "start:dev": "tsx watch src/server.ts | pino-pretty",
     "lint": "eslint 'src/**/*.{js,ts}'",
     "lint:fix": "eslint 'src/**/*.{js,ts}' --fix",
