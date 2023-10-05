@@ -2,16 +2,13 @@ import Fastify from 'fastify';
 import { ZodError } from 'zod';
 
 import { env } from '@/env';
-import { prisma } from '@/lib/prisma';
+import { usersRoutes } from './http/controllers/users/routes';
 
 export const app = Fastify({
   logger: true,
 });
 
-app.get('/', async (request, response) => {
-  const users = await prisma.user.findMany();
-  response.send({ users });
-});
+app.register(usersRoutes);
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
