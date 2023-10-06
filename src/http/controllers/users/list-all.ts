@@ -5,12 +5,10 @@ import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-reposi
 import { FetchUsersUseCase } from '@/use-cases/fetch-users';
 
 export async function listAll(_: FastifyRequest, reply: FastifyReply) {
-  try {
-    const usersRepository = new PrismaUsersRepository();
-    const useCase = new FetchUsersUseCase(usersRepository);
+  const usersRepository = new PrismaUsersRepository();
+  const useCase = new FetchUsersUseCase(usersRepository);
 
-    await useCase.execute();
-  } catch (error: any) {
-    return reply.status(409).send({ message: error.message });
-  }
+  const { users } = await useCase.execute();
+
+  return reply.status(200).send({ users });
 }
