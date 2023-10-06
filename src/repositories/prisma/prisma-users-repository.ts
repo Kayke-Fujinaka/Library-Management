@@ -13,14 +13,20 @@ export class PrismaUsersRepository implements UsersRepository {
   }
 
   async findByEmail(email: string) {
-    const user = await prisma.user.findUnique({ where: { email } });
+    const user = await prisma.user.findUnique({
+      where: { email, deleted_at: false },
+    });
 
     return user;
   }
 
   async findMany() {
-    const users = await prisma.user.findMany();
+    const users = await prisma.user.findMany({ where: { deleted_at: false } });
 
     return users;
+  }
+
+  async delete(id: string) {
+    return prisma.user.update({ where: { id }, data: { deleted_at: true } });
   }
 }
