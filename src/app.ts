@@ -8,7 +8,7 @@ export const app = Fastify({
   logger: true,
 });
 
-app.register(usersRoutes);
+app.register(usersRoutes, { prefix: '/users' });
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
