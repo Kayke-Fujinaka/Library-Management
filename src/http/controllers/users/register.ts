@@ -4,15 +4,24 @@ import { z } from 'zod';
 
 import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository';
 import { RegisterUserUseCase } from '@/use-cases/register-user';
+import { passwordValidation } from '@/utils/validation';
+import { customString } from '@/utils/zodCustom';
 
 export async function registerUser(
   request: FastifyRequest,
   reply: FastifyReply,
 ) {
   const registerBodySchema = z.object({
-    name: z.string(),
-    email: z.string().email(),
-    password: z.string().min(8),
+    name: customString('nome')
+      .nonempty('O nome não pode estar vazio.')
+      .refine((name) => /^[a-zA-Z\s]*$/.test(name), {
+        message: 'O nome não pode conter caracteres especiais ou números.',
+        path: ['name'],
+      }),
+    email: customString('e-mail')
+      .nonempty('O nome não pode estar vazio.')
+      .email('E-mail inválido.'),
+    password: passwordValidation,
   });
 
   const { name, email, password } = registerBodySchema.parse(request.body);
