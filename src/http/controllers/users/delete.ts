@@ -6,11 +6,11 @@ import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-reposi
 import { DeleteUserUseCase } from '@/use-cases/delete-users';
 
 export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
-  const deleteUserBodySchema = z.object({
+  const deleteUserQuerySchema = z.object({
     id: z.string(),
   });
 
-  const { id } = deleteUserBodySchema.parse(request.body);
+  const { id } = deleteUserQuerySchema.parse(request.query);
 
   try {
     const usersRepository = new PrismaUsersRepository();
