@@ -4,10 +4,11 @@ import { z } from 'zod';
 
 import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository';
 import { DeleteUserUseCase } from '@/use-cases/delete-users';
+import { customUUID } from '@/utils/zodCustom';
 
 export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
   const deleteUserQuerySchema = z.object({
-    id: z.string(),
+    id: customUUID('id'),
   });
 
   const { id } = deleteUserQuerySchema.parse(request.query);
