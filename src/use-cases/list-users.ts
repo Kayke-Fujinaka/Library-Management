@@ -2,8 +2,10 @@ import { User } from '@prisma/client';
 
 import { UsersRepository } from '@/repositories/users-repository';
 
+type SanitizedUser = Omit<User, 'password_hash'>;
+
 interface ListUsersUseCaseResponse {
-  users: User[];
+  users: SanitizedUser[];
 }
 
 export class ListUsersUseCase {
@@ -12,6 +14,12 @@ export class ListUsersUseCase {
   async execute(): Promise<ListUsersUseCaseResponse> {
     const users = await this.usersRepository.findMany();
 
-    return { users };
+    const sanitizedUsers = users.map((user) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password_hash, ...rest } = user;
+      return rest;
+    });
+
+    return { users: sanitizedUsers };
   }
 }
