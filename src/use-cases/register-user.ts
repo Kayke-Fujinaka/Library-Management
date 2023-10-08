@@ -23,7 +23,7 @@ export class RegisterUserUseCase {
   }: RegisterUserUseCaseRequest): Promise<RegisterUserUseCaseResponse> {
     const userWithSameEmail = await this.usersRepository.findByEmail(email);
 
-    if (userWithSameEmail) throw new Error('Email already registered.');
+    if (userWithSameEmail) throw new Error('E-mail já registrado.');
 
     const password_hash = await bcrypt.hash(password, 6);
 
