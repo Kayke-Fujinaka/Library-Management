@@ -19,7 +19,7 @@ export async function registerUser(
         path: ['name'],
       }),
     email: customString('e-mail')
-      .nonempty('O nome não pode estar vazio.')
+      .nonempty('O e-mail não pode estar vazio.')
       .email('E-mail inválido.'),
     password: passwordValidation,
   });
