@@ -25,13 +25,21 @@ model User {
 }
 
 model Book {
-  id         String   @id @default(uuid())
-  title      String
-  author     String
-  isbn       String   @unique
-  created_at DateTime @default(now())
-  updated_at DateTime @updatedAt
-  deleted_at Boolean  @default(false)
+  id           String   @id @default(uuid())
+  title        String
+  author       String
+  isbn         String   @unique
+  publisher    String
+  release_year Int
+  price        Decimal
+  description  String
+  page_count    Int
+  cover_image   String?
+  language     String
+  genre        String
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  deleted_at   Boolean  @default(false)
 
   user    User?   @relation(fields: [user_id], references: [id])
   user_id String?
