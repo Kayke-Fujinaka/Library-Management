@@ -6,6 +6,12 @@ export function customString(fieldName: string, message?: string) {
   });
 }
 
+export function customNumber(fieldName: string, message?: string) {
+  return z.number({
+    invalid_type_error: message || `O ${fieldName} deve ser um número.`,
+  });
+}
+
 export function customUUID(fieldName: string, message?: string) {
   return customString('UUID').refine(
     (id) => {
