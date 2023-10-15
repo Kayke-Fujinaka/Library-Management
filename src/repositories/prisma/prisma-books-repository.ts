@@ -11,4 +11,10 @@ export class PrismaBooksRepository implements BooksRepository {
 
     return book;
   }
+
+  async findMany() {
+    const books = await prisma.book.findMany();
+
+    return books;
+  }
 }
