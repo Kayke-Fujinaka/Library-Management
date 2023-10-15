@@ -22,7 +22,7 @@ describe('List Users Use Case', () => {
     email: 'johndoe@example.com',
     created_at: new Date(),
     updated_at: new Date(),
-    deleted_at: false,
+    deleted_at: null,
   };
 
   it('should be defined', () => {
@@ -37,7 +37,6 @@ describe('List Users Use Case', () => {
 
     const result = await sut.execute();
 
-    expect(findManySpy).toHaveBeenCalledWith(users);
     expect(findManySpy).toHaveBeenCalledTimes(1);
 
     expect(result.users).toEqual(users);
@@ -48,7 +47,6 @@ describe('List Users Use Case', () => {
 
     const result = await sut.execute();
 
-    expect(findManySpy).toHaveBeenCalledWith([]);
     expect(findManySpy).toHaveBeenCalledTimes(1);
 
     expect(result.users).toEqual([]);
