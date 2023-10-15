@@ -39,4 +39,12 @@ describe('List Users Use Case', () => {
 
     expect(result.users).toEqual(users);
   });
+
+  it('should be able to return no users', async () => {
+    findManySpy.mockResolvedValue([]);
+
+    const result = await sut.execute();
+
+    expect(result.users).toEqual([]);
+  });
 });
