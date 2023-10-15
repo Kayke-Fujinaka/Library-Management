@@ -2,12 +2,17 @@ import { z } from 'zod';
 
 type Gender = 'male' | 'female';
 
+function getArticle(gender: Gender): string {
+  return gender === 'male' ? 'O' : 'A';
+}
+
 export function customString(
   fieldName: string,
   gender: Gender = 'male',
   nonEmpty: boolean = true,
 ) {
-  const article = gender === 'male' ? 'O' : 'A';
+  const article = getArticle(gender);
+
   let field = z.string({
     invalid_type_error: `${article} ${fieldName} deve ser uma string.`,
   });
@@ -20,23 +25,28 @@ export function customString(
 }
 
 export function customNumber(fieldName: string, gender: Gender = 'male') {
-  const article = gender === 'male' ? 'O' : 'A';
-  const field = z.number({
+  const article = getArticle(gender);
+
+  return z.number({
     invalid_type_error: `${article} ${fieldName} deve ser um número.`,
   });
-
-  return field;
 }
 
-export function customUUID(fieldName: string, message?: string) {
-  return customString('UUID').refine(
+export function customUUID(
+  fieldName: string,
+  gender: Gender = 'male',
+  message?: string,
+) {
+  const article = getArticle(gender);
+
+  return customString(fieldName, gender).refine(
     (id) => {
       const uuidRegex =
         /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
       return uuidRegex.test(id);
     },
     {
-      message: message || `O ${fieldName} deve ser um UUID.`,
+      message: message || `${article} ${fieldName} deve ser um UUID.`,
     },
   );
 }
