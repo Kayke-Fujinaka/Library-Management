@@ -1,14 +1,28 @@
 import { z } from 'zod';
 
-export function customString(fieldName: string, message?: string) {
+type Gender = 'male' | 'female';
+
+export function customString(
+  fieldName: string,
+  gender: Gender = 'male',
+  message?: string,
+) {
+  const article = gender === 'male' ? 'O' : 'A';
   return z.string({
-    invalid_type_error: message || `O ${fieldName} deve ser uma string.`,
+    invalid_type_error:
+      message || `${article} ${fieldName} deve ser uma string.`,
   });
 }
 
-export function customNumber(fieldName: string, message?: string) {
+export function customNumber(
+  fieldName: string,
+  gender: Gender = 'male',
+  message?: string,
+) {
+  const article = gender === 'male' ? 'O' : 'A';
   return z.number({
-    invalid_type_error: message || `O ${fieldName} deve ser um número.`,
+    invalid_type_error:
+      message || `${article} ${fieldName} deve ser um número.`,
   });
 }
 
