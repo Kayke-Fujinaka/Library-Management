@@ -1,7 +1,7 @@
 import { FastifyInstance } from 'fastify';
 
 import { deleteUser } from './delete';
-import { listUsers } from './list-users';
+import { listUsers } from './list';
 import { registerUser } from './register';
 
 export async function usersRoutes(app: FastifyInstance) {
