@@ -22,7 +22,7 @@ interface RegisterBookUseCaseResponse {
 export class RegisterBookUseCase {
   constructor(private booksRepository: BooksRepository) {}
 
-  private generateISBN(): string {
+  public generateISBN(): string {
     const isbnPrefix = '978';
 
     const generatedDigits = Array.from({ length: 9 }, () =>
