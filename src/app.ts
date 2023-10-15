@@ -2,6 +2,7 @@ import Fastify from 'fastify';
 import { ZodError } from 'zod';
 
 import { env } from '@/env';
+import { booksRoutes } from './http/controllers/books/route';
 import { usersRoutes } from './http/controllers/users/routes';
 
 export const app = Fastify({
@@ -9,6 +10,7 @@ export const app = Fastify({
 });
 
 app.register(usersRoutes, { prefix: '/users' });
+app.register(booksRoutes, { prefix: '/books' });
 
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
