@@ -2,7 +2,7 @@ import { Book } from '@prisma/client';
 
 import { BooksRepository } from '@/repositories/books-repository';
 
-interface RegisterBookUseCaseRequest {
+export interface RegisterBookUseCaseRequest {
   title: string;
   author: string;
   publisher: string;
