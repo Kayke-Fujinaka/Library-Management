@@ -5,25 +5,27 @@ type Gender = 'male' | 'female';
 export function customString(
   fieldName: string,
   gender: Gender = 'male',
-  message?: string,
+  nonEmpty: boolean = true,
 ) {
   const article = gender === 'male' ? 'O' : 'A';
-  return z.string({
-    invalid_type_error:
-      message || `${article} ${fieldName} deve ser uma string.`,
+  let field = z.string({
+    invalid_type_error: `${article} ${fieldName} deve ser uma string.`,
   });
+
+  if (nonEmpty) {
+    field = field.nonempty(`${article} ${fieldName} não pode estar vazio.`);
+  }
+
+  return field;
 }
 
-export function customNumber(
-  fieldName: string,
-  gender: Gender = 'male',
-  message?: string,
-) {
+export function customNumber(fieldName: string, gender: Gender = 'male') {
   const article = gender === 'male' ? 'O' : 'A';
-  return z.number({
-    invalid_type_error:
-      message || `${article} ${fieldName} deve ser um número.`,
+  const field = z.number({
+    invalid_type_error: `${article} ${fieldName} deve ser um número.`,
   });
+
+  return field;
 }
 
 export function customUUID(fieldName: string, message?: string) {
