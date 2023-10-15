@@ -3,7 +3,7 @@ import bcrypt from 'bcryptjs';
 
 import { UsersRepository } from '@/repositories/users-repository';
 
-interface RegisterUserUseCaseRequest {
+export interface RegisterUserUseCaseRequest {
   name: string;
   email: string;
   password: string;
