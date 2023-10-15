@@ -37,6 +37,9 @@ describe('List Users Use Case', () => {
 
     const result = await sut.execute();
 
+    expect(findManySpy).toHaveBeenCalledWith(users);
+    expect(findManySpy).toHaveBeenCalledTimes(1);
+
     expect(result.users).toEqual(users);
   });
 
@@ -44,6 +47,9 @@ describe('List Users Use Case', () => {
     findManySpy.mockResolvedValue([]);
 
     const result = await sut.execute();
+
+    expect(findManySpy).toHaveBeenCalledWith([]);
+    expect(findManySpy).toHaveBeenCalledTimes(1);
 
     expect(result.users).toEqual([]);
   });
