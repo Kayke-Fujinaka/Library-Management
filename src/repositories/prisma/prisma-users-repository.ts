@@ -14,7 +14,7 @@ export class PrismaUsersRepository implements UsersRepository {
 
   async findById(id: string) {
     const user = await prisma.user.findUnique({
-      where: { id, deleted_at: false },
+      where: { id, deleted_at: null },
     });
 
     return user;
@@ -22,19 +22,22 @@ export class PrismaUsersRepository implements UsersRepository {
 
   async findByEmail(email: string) {
     const user = await prisma.user.findUnique({
-      where: { email, deleted_at: false },
+      where: { email, deleted_at: null },
     });
 
     return user;
   }
 
   async findMany() {
-    const users = await prisma.user.findMany({ where: { deleted_at: false } });
+    const users = await prisma.user.findMany({ where: { deleted_at: null } });
 
     return users;
   }
 
   async delete(id: string) {
-    return prisma.user.update({ where: { id }, data: { deleted_at: true } });
+    return prisma.user.update({
+      where: { id },
+      data: { deleted_at: new Date() },
+    });
   }
 }
