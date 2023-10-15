@@ -5,7 +5,6 @@ import { BooksRepository } from '@/repositories/books-repository';
 interface RegisterBookUseCaseRequest {
   title: string;
   author: string;
-  isbn: string;
   publisher: string;
   release_year: number;
   price: number;
@@ -23,10 +22,32 @@ interface RegisterBookUseCaseResponse {
 export class RegisterBookUseCase {
   constructor(private booksRepository: BooksRepository) {}
 
+  private generateISBN(): string {
+    const isbnPrefix = '978';
+
+    const generatedDigits = Array.from({ length: 9 }, () =>
+      Math.floor(Math.random() * 10),
+    ).join('');
+
+    const combinedDigits = isbnPrefix + generatedDigits;
+
+    let checksumTotal = 0;
+
+    combinedDigits.split('').forEach((digit, position) => {
+      const numericValue = parseInt(digit, 10);
+
+      checksumTotal += position % 2 === 0 ? numericValue : numericValue * 3;
+    });
+
+    const checksumRemainder = checksumTotal % 10;
+    const validationDigit = ((10 - checksumRemainder) % 10).toString();
+
+    return combinedDigits + validationDigit;
+  }
+
   async execute({
     title,
     author,
-    isbn,
     publisher,
     release_year,
     price,
@@ -36,12 +57,10 @@ export class RegisterBookUseCase {
     language,
     genre,
   }: RegisterBookUseCaseRequest): Promise<RegisterBookUseCaseResponse> {
-    // Validar se livro já existe
-
     const book = await this.booksRepository.create({
       title,
       author,
-      isbn,
+      isbn: this.generateISBN(),
       publisher,
       release_year,
       price,
