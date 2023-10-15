@@ -2,7 +2,7 @@ import { User } from '@prisma/client';
 
 import { UsersRepository } from '@/repositories/users-repository';
 
-type SanitizedUser = Omit<User, 'password_hash'>;
+export type SanitizedUser = Omit<User, 'password_hash'>;
 
 interface ListUsersUseCaseResponse {
   users: SanitizedUser[];
