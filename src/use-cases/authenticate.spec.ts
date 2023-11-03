@@ -53,7 +53,7 @@ describe('Authenticate Use Case', () => {
     );
   });
 
-  it('should not authenticate with incorrect email', async () => {
+  it('should not be able to authenticate with incorrect email', async () => {
     findByEmailSpy.mockResolvedValue(null);
 
     await expect(sut.execute(userData)).rejects.toThrowError(
@@ -63,7 +63,7 @@ describe('Authenticate Use Case', () => {
     expect(findByEmailSpy).toHaveBeenCalledWith(userData.email);
   });
 
-  it('should not authenticate with incorrect password', async () => {
+  it('should not be able to authenticate with incorrect password', async () => {
     findByEmailSpy.mockResolvedValue({
       id: '1',
       name: 'John Doe',
