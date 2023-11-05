@@ -1,5 +1,5 @@
 import { User } from '@prisma/client';
-import { compare } from 'bcryptjs';
+import bcrypt from 'bcryptjs';
 
 import { UsersRepository } from '@/repositories/users-repository';
 
@@ -23,7 +23,10 @@ export class AuthenticateUseCase {
 
     if (!user) throw new Error('Credenciais inválidas.');
 
-    const doesPasswordMatches = await compare(password, user.password_hash);
+    const doesPasswordMatches = await bcrypt.compare(
+      password,
+      user.password_hash,
+    );
 
     if (!doesPasswordMatches) throw new Error('Credenciais inválidas.');
 
