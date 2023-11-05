@@ -3,17 +3,14 @@ import { ZodError } from 'zod';
 
 import { env } from '@/env';
 import { booksRoutes } from './http/controllers/books/route';
+import { healthRoutes } from './http/controllers/health/routes';
 import { usersRoutes } from './http/controllers/users/routes';
 
 export const app = Fastify({
   logger: true,
 });
 
-app.get('/health', async (request, reply) => {
-  return reply
-    .status(200)
-    .send({ status: 'ok', timestamp: new Date().toISOString() });
-});
+app.register(healthRoutes, { prefix: '/health' });
 app.register(usersRoutes, { prefix: '/users' });
 app.register(booksRoutes, { prefix: '/books' });
 
