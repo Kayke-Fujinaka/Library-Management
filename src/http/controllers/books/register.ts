@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
-import { makeRegisterBookUseCase } from '@/use-cases/_factories_/books/make-register-use-case';
+import { makeRegisterBookUseCase } from '@/use-cases/_factories_';
 import { customNumber, customString } from '@/utils/zodCustom';
 
 export async function registerBook(

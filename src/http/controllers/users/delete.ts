@@ -2,8 +2,8 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
-import { ResourceNotFoundError } from '@/use-cases/_errors_/resource-not-found';
-import { makeDeleteUserUseCase } from '@/use-cases/_factories_/users/make-delete-use-case';
+import { ResourceNotFoundError } from '@/use-cases/_errors_';
+import { makeDeleteUserUseCase } from '@/use-cases/_factories_';
 import { customUUID } from '@/utils/zodCustom';
 
 export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {

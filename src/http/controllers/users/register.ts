@@ -2,8 +2,8 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
-import { UserAlreadyExistsError } from '@/use-cases/_errors_/user-already-exists';
-import { makeRegisterUserUseCase } from '@/use-cases/_factories_/users/make-register-use-case';
+import { UserAlreadyExistsError } from '@/use-cases/_errors_';
+import { makeRegisterUserUseCase } from '@/use-cases/_factories_';
 import { passwordValidation } from '@/utils/validation';
 import { customString } from '@/utils/zodCustom';
 
