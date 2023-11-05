@@ -1,8 +1,11 @@
 import { FastifyInstance } from 'fastify';
-import { registerBook } from './register';
+
+import { verifyJWT } from '@/http/middlewares/verify-jwt';
 import { listBooks } from './list-books';
+import { registerBook } from './register';
 
 export async function booksRoutes(app: FastifyInstance) {
-  app.post('/', registerBook);
   app.get('/', listBooks);
+
+  app.post('/', { onRequest: [verifyJWT] }, registerBook);
 }
