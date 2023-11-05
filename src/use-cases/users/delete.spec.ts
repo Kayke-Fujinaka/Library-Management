@@ -1,6 +1,7 @@
 import { User } from '@prisma/client';
 
 import { UsersRepository } from '@/repositories/users-repository';
+import { ResourceNotFoundError } from '../_errors_/resource-not-found';
 import { DeleteUserUseCase } from './delete';
 
 describe('Delete User Use Case', () => {
@@ -54,8 +55,8 @@ describe('Delete User Use Case', () => {
 
     findByIdSpy.mockResolvedValue(null);
 
-    await expect(sut.execute({ id: inexistentUserId })).rejects.toThrow(
-      'Usuário não existe.',
+    await expect(sut.execute({ id: inexistentUserId })).rejects.toBeInstanceOf(
+      ResourceNotFoundError,
     );
 
     expect(findByIdSpy).toHaveBeenCalledTimes(1);
