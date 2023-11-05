@@ -22,6 +22,8 @@
   "description": "A Library Management System (LMS) allows a library to manage its books, members, and their borrowing activities.",
   "type": "module",
   "dependencies": {
+    "@fastify/cookie": "^9.1.0",
+    "@fastify/jwt": "^7.2.2",
     "@prisma/client": "^5.4.1",
     "bcryptjs": "^2.4.3",
     "dotenv": "^16.3.1",
