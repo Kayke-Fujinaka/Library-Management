@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs';
 
 import { UsersRepository } from '@/repositories/users-repository';
+import { InvalidCredentialsError } from '../_errors_/invalid-credentials';
 import { AuthenticateUseCase } from './authenticate';
 
 describe('Authenticate Use Case', () => {
@@ -56,8 +57,8 @@ describe('Authenticate Use Case', () => {
   it('should not be able to authenticate with incorrect email', async () => {
     findByEmailSpy.mockResolvedValue(null);
 
-    await expect(sut.execute(userData)).rejects.toThrowError(
-      'Credenciais inválidas.',
+    await expect(sut.execute(userData)).rejects.toBeInstanceOf(
+      InvalidCredentialsError,
     );
 
     expect(findByEmailSpy).toHaveBeenCalledWith(userData.email);
@@ -73,8 +74,8 @@ describe('Authenticate Use Case', () => {
 
     compareSpy.mockResolvedValue(false);
 
-    await expect(sut.execute(userData)).rejects.toThrowError(
-      'Credenciais inválidas.',
+    await expect(sut.execute(userData)).rejects.toBeInstanceOf(
+      InvalidCredentialsError,
     );
 
     expect(findByEmailSpy).toHaveBeenCalledWith(userData.email);
