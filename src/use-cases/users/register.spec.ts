@@ -2,6 +2,7 @@ import bcrypt from 'bcryptjs';
 
 import { UsersRepository } from '@/repositories/users-repository';
 import { RegisterUserUseCase, RegisterUserUseCaseRequest } from './register';
+import { UserAlreadyExistsError } from '../_errors_/user-already-exists';
 
 describe('Register User Use Case', () => {
   let sut: RegisterUserUseCase;
@@ -64,8 +65,8 @@ describe('Register User Use Case', () => {
       password_hash: 'existing_hashed_password',
     });
 
-    await expect(sut.execute(userData)).rejects.toThrowError(
-      'E-mail já registrado.',
+    await expect(sut.execute(userData)).rejects.toBeInstanceOf(
+      UserAlreadyExistsError,
     );
 
     expect(findByEmailSpy).toHaveBeenCalledWith(userData.email);

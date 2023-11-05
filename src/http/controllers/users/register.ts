@@ -2,6 +2,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
+import { UserAlreadyExistsError } from '@/use-cases/_errors_/user-already-exists';
 import { makeRegisterUserUseCase } from '@/use-cases/_factories_/users/make-register-use-case';
 import { passwordValidation } from '@/utils/validation';
 import { customString } from '@/utils/zodCustom';
@@ -30,7 +31,11 @@ export async function registerUser(
 
     await useCase.execute({ name, email, password });
   } catch (error: any) {
-    return reply.status(409).send({ message: error.message });
+    if (error instanceof UserAlreadyExistsError) {
+      return reply.status(409).send({ message: error.message });
+    }
+
+    throw error;
   }
 
   return reply.status(201).send();
