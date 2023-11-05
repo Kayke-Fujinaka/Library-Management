@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 import { InvalidCredentialsError } from '@/use-cases/_errors_';
 import { makeAuthenticateUseCase } from '@/use-cases/_factories_';
-import { customString } from '@/utils/zodCustom';
+import { customString } from '@/utils';
 
 export async function authenticate(
   request: FastifyRequest,

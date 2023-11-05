@@ -4,7 +4,7 @@ import { z } from 'zod';
 
 import { ResourceNotFoundError } from '@/use-cases/_errors_';
 import { makeDeleteUserUseCase } from '@/use-cases/_factories_';
-import { customUUID } from '@/utils/zodCustom';
+import { customUUID } from '@/utils';
 
 export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
   const deleteUserQuerySchema = z.object({
