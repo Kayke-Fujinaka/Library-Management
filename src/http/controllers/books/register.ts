@@ -1,8 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
-import { PrismaBooksRepository } from '@/repositories/prisma/prisma-books-repository';
-import { RegisterBookUseCase } from '@/use-cases/books';
+import { makeRegisterBookUseCase } from '@/use-cases/_factories_/books/make-register-use-case';
 import { customNumber, customString } from '@/utils/zodCustom';
 
 export async function registerBook(
@@ -54,8 +53,7 @@ export async function registerBook(
     genre,
   } = registerBodySchema.parse(request.body);
 
-  const booksRepository = new PrismaBooksRepository();
-  const useCase = new RegisterBookUseCase(booksRepository);
+  const useCase = makeRegisterBookUseCase();
 
   await useCase.execute({
     title,

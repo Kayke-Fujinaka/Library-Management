@@ -2,8 +2,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
-import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository';
-import { AuthenticateUseCase } from '@/use-cases/users';
+import { makeAuthenticateUseCase } from '@/use-cases/_factories_/users/make-authenticate-use-case';
 import { customString } from '@/utils/zodCustom';
 
 export async function authenticate(
@@ -20,8 +19,7 @@ export async function authenticate(
   const { email, password } = authenticateBodySchema.parse(request.body);
 
   try {
-    const usersRepository = new PrismaUsersRepository();
-    const useCase = new AuthenticateUseCase(usersRepository);
+    const useCase = makeAuthenticateUseCase();
 
     const { user } = await useCase.execute({ email, password });
 
