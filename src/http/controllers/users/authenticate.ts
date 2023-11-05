@@ -3,7 +3,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
 import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository';
-import { AuthenticateUseCase } from '@/use-cases/authenticate';
+import { AuthenticateUseCase } from '@/use-cases/users/authenticate';
 import { customString } from '@/utils/zodCustom';
 
 export async function authenticate(

@@ -2,7 +2,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
 import { PrismaBooksRepository } from '@/repositories/prisma/prisma-books-repository';
-import { RegisterBookUseCase } from '@/use-cases/register-book';
+import { RegisterBookUseCase } from '@/use-cases/books/register-book';
 import { customNumber, customString } from '@/utils/zodCustom';
 
 export async function registerBook(
