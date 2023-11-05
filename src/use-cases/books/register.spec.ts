@@ -1,8 +1,5 @@
 import { BooksRepository } from '@/repositories/books-repository';
-import {
-  RegisterBookUseCase,
-  RegisterBookUseCaseRequest,
-} from './register-book';
+import { RegisterBookUseCase, RegisterBookUseCaseRequest } from './register';
 
 describe('Register Book Use Case', () => {
   let sut: RegisterBookUseCase;

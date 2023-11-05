@@ -1,10 +1,7 @@
 import bcrypt from 'bcryptjs';
 
 import { UsersRepository } from '@/repositories/users-repository';
-import {
-  RegisterUserUseCase,
-  RegisterUserUseCaseRequest,
-} from './register-user';
+import { RegisterUserUseCase, RegisterUserUseCaseRequest } from './register';
 
 describe('Register User Use Case', () => {
   let sut: RegisterUserUseCase;

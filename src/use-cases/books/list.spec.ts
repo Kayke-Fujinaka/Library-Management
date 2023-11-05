@@ -1,7 +1,7 @@
 import { Book, Prisma } from '@prisma/client';
 
 import { BooksRepository } from '@/repositories/books-repository';
-import { ListBooksUseCase } from './list-books';
+import { ListBooksUseCase } from './list';
 
 describe('List Books Use Case', () => {
   let sut: ListBooksUseCase;

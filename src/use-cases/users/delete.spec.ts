@@ -1,7 +1,7 @@
 import { User } from '@prisma/client';
 
 import { UsersRepository } from '@/repositories/users-repository';
-import { DeleteUserUseCase } from './delete-user';
+import { DeleteUserUseCase } from './delete';
 
 describe('Delete User Use Case', () => {
   let sut: DeleteUserUseCase;

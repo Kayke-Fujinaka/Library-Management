@@ -1,5 +1,5 @@
 import { UsersRepository } from '@/repositories/users-repository';
-import { ListUsersUseCase, SanitizedUser } from './list-users';
+import { ListUsersUseCase, SanitizedUser } from './list';
 
 describe('List Users Use Case', () => {
   let sut: ListUsersUseCase;
