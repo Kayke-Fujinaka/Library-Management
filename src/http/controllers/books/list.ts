@@ -1,7 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 
 import { PrismaBooksRepository } from '@/repositories/prisma/prisma-books-repository';
-import { ListBooksUseCase } from '@/use-cases/books/list';
+import { ListBooksUseCase } from '@/use-cases/books';
 
 export async function listBooks(_: FastifyRequest, reply: FastifyReply) {
   const booksRepository = new PrismaBooksRepository();

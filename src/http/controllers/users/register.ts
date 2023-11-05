@@ -3,7 +3,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
 import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository';
-import { RegisterUserUseCase } from '@/use-cases/users/register';
+import { RegisterUserUseCase } from '@/use-cases/users';
 import { passwordValidation } from '@/utils/validation';
 import { customString } from '@/utils/zodCustom';
 

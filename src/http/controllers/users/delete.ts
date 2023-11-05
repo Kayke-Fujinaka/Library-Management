@@ -3,7 +3,7 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
 import { PrismaUsersRepository } from '@/repositories/prisma/prisma-users-repository';
-import { DeleteUserUseCase } from '@/use-cases/users/delete';
+import { DeleteUserUseCase } from '@/use-cases/users';
 import { customUUID } from '@/utils/zodCustom';
 
 export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
