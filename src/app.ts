@@ -1,3 +1,5 @@
+import fastifyCookie from '@fastify/cookie';
+import fastifyJwt from '@fastify/jwt';
 import Fastify from 'fastify';
 import { ZodError } from 'zod';
 
@@ -9,6 +11,19 @@ import { usersRoutes } from './http/controllers/users/routes';
 export const app = Fastify({
   logger: true,
 });
+
+app.register(fastifyJwt, {
+  secret: env.JWT_SECRET,
+  cookie: {
+    cookieName: 'refreshToken',
+    signed: false,
+  },
+  sign: {
+    expiresIn: '10m',
+  },
+});
+
+app.register(fastifyCookie);
 
 app.register(healthRoutes, { prefix: '/health' });
 app.register(usersRoutes, { prefix: '/users' });
